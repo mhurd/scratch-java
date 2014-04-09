@@ -1,4 +1,14 @@
 #################
+## Mike's
+#################
+
+.idea/
+project/project
+project/target
+target/
+*.iml
+
+#################
 ## Eclipse
 #################
 
