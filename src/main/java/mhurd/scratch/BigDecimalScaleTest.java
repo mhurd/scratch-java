@@ -3,6 +3,7 @@ package mhurd.scratch;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +27,13 @@ public class BigDecimalScaleTest {
         BigDecimal l2 = new BigDecimal("200000100020000.12499999999999511501869164931122213602066040039062500");
         System.out.println("Unrounded: " + l2);
         System.out.println("Rounded: " + l2.setScale(8, RoundingMode.HALF_UP).round(new MathContext(20)));
+
+        BigDecimal foo = new BigDecimal("100");
+        System.out.println("DIVIDE = " + foo.divide(new BigDecimal("10"), 2, BigDecimal.ROUND_HALF_UP));
+
+        if (Long.MAX_VALUE + 1 > Long.MAX_VALUE) {
+            System.out.println("Greater than max long!");
+        }
     }
 
     private static void divideTest() {
@@ -33,7 +41,7 @@ public class BigDecimalScaleTest {
     }
 
     public static void main(String[] args) {
-        //scalingTest();
+        scalingTest();
         divideTest();
     }
 
