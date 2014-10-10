@@ -20,7 +20,7 @@ public class BitwiseStorage {
             return bit;
         }
 
-        public static boolean hasAllProperties(int value, LegProperty... properties) {
+        public static boolean hasProperties(int value, LegProperty... properties) {
             for (LegProperty property : properties) {
                 if ((value & property.getMask()) != property.getMask()) {
                     return false;
@@ -38,24 +38,28 @@ public class BitwiseStorage {
     public static int legPropertiesExtra = 7; // HOLD_TOMS_REPORTING & SKIP_CRITICAL_AMEND_CHECK + extra 4 set
 
     public static void main(String[] args) {
-        assertTrue(!LegProperty.hasAllProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING));
-        assertTrue(!LegProperty.hasAllProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(!LegProperty.hasProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING));
+        assertTrue(!LegProperty.hasProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING,
+            LegProperty.SKIP_CRITICAL_AMEND_CHECK));
 
-        assertTrue(LegProperty.hasAllProperties(legProperties1, LegProperty.HOLD_TOMS_REPORTING));
-        assertTrue(!LegProperty.hasAllProperties(legProperties1, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
-        assertTrue(!LegProperty.hasAllProperties(legProperties1, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(LegProperty.hasProperties(legProperties1, LegProperty.HOLD_TOMS_REPORTING));
+        assertTrue(!LegProperty.hasProperties(legProperties1, LegProperty.HOLD_TOMS_REPORTING,
+            LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(!LegProperty.hasProperties(legProperties1, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
 
-        assertTrue(LegProperty.hasAllProperties(legProperties2, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
-        assertTrue(!LegProperty.hasAllProperties(legProperties2, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
-        assertTrue(!LegProperty.hasAllProperties(legProperties2, LegProperty.HOLD_TOMS_REPORTING));
+        assertTrue(LegProperty.hasProperties(legProperties2, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(!LegProperty.hasProperties(legProperties2, LegProperty.HOLD_TOMS_REPORTING,
+            LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(!LegProperty.hasProperties(legProperties2, LegProperty.HOLD_TOMS_REPORTING));
 
-        assertTrue(LegProperty.hasAllProperties(legPropertiesAll, LegProperty.HOLD_TOMS_REPORTING));
-        assertTrue(LegProperty.hasAllProperties(legPropertiesAll, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
-        assertTrue(LegProperty.hasAllProperties(legPropertiesAll, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(LegProperty.hasProperties(legPropertiesAll, LegProperty.HOLD_TOMS_REPORTING));
+        assertTrue(LegProperty.hasProperties(legPropertiesAll, LegProperty.HOLD_TOMS_REPORTING,
+            LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(LegProperty.hasProperties(legPropertiesAll, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
 
-        assertTrue(LegProperty.hasAllProperties(legPropertiesExtra, LegProperty.HOLD_TOMS_REPORTING));
-        assertTrue(LegProperty.hasAllProperties(legPropertiesExtra, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
-        assertTrue(LegProperty.hasAllProperties(legPropertiesExtra, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(LegProperty.hasProperties(legPropertiesExtra, LegProperty.HOLD_TOMS_REPORTING));
+        assertTrue(LegProperty.hasProperties(legPropertiesExtra, LegProperty.HOLD_TOMS_REPORTING, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
+        assertTrue(LegProperty.hasProperties(legPropertiesExtra, LegProperty.SKIP_CRITICAL_AMEND_CHECK));
     }
 
 }
