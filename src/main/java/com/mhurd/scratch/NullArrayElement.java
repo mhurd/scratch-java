@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 public class NullArrayElement {
 

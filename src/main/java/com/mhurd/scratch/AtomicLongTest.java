@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,12 +7,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class AtomicLongTest {
 
-    public static final AtomicLong timestamp = new AtomicLong(System.currentTimeMillis());
-    public static final long THREE_SECONDS = 1000*3;
-    public static final Map<String, String> cache = new ConcurrentHashMap<String, String>();
+    private static final AtomicLong timestamp = new AtomicLong(System.currentTimeMillis());
+    private static final long THREE_SECONDS = 1000*3;
+    private static final Map<String, String> cache = new ConcurrentHashMap<>();
 
     private static Map<String, String> runSQL() {
-        Map<String, String> results = new HashMap<String, String>();
+        Map<String, String> results = new HashMap<>();
         results.put("foo", Thread.currentThread().getName());
         return results;
     }
@@ -38,12 +38,7 @@ public class AtomicLongTest {
     }
 
     private static void spawnReader() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                read();
-            }
-        }).start();
+        new Thread(AtomicLongTest::read).start();
     }
 
     public static void main(String[] args) {
@@ -54,7 +49,7 @@ public class AtomicLongTest {
             spawnReader();
             spawnReader();
             try {
-                Thread.sleep(1000l);
+                Thread.sleep(1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

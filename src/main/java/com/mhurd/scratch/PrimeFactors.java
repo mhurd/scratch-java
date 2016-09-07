@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class PrimeFactors {
 
     private final int[] primes;
 
-    public PrimeFactors() {
+    private PrimeFactors() {
         primes = new int[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31,
                             37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
                             79, 83, 89, 97, 101, 103, 107, 109, 113, 127,
@@ -41,8 +41,8 @@ public class PrimeFactors {
         }
     }
 
-    public List<Integer> getPrimeFactorsOf(final int number) {
-        return getPrimeFactorsRecur(number, number, 0, new ArrayList<Integer>(), 1);
+    private List<Integer> getPrimeFactorsOf(final int number) {
+        return getPrimeFactorsRecur(number, number, 0, new ArrayList<>(), 1);
     }
 
     public static void main(String[] args) {

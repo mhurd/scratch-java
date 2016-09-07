@@ -1,14 +1,19 @@
-package mhurd.scratch.multiprocessor;
+package com.mhurd.scratch.multiprocessor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class TASLock extends AbstractLock {
+public class TTASLock extends AbstractLock {
 
     private AtomicBoolean state = new AtomicBoolean(false);
 
     @Override
     public void lock() {
-        while (state.getAndSet(true)) {}
+        while (true) {
+            while (state.get()) {}
+            if (!state.getAndSet(true)) {
+                return;
+            }
+        }
     }
 
     @Override

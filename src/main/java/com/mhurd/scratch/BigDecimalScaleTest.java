@@ -1,20 +1,12 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
-/**
- * Created with IntelliJ IDEA.
- * User: mhurd
- * Date: 07/09/12
- * Time: 15:57
- * To change this template use File | Settings | File Templates.
- */
 public class BigDecimalScaleTest {
 
-    public static final BigDecimal HUNDRED = new BigDecimal("100");
+    private static final BigDecimal HUNDRED = new BigDecimal("100");
 
     private static void scalingTest() {
         BigDecimal frm = new BigDecimal("0.60125");
@@ -30,10 +22,6 @@ public class BigDecimalScaleTest {
 
         BigDecimal foo = new BigDecimal("100");
         System.out.println("DIVIDE = " + foo.divide(new BigDecimal("10"), 2, BigDecimal.ROUND_HALF_UP));
-
-        if (Long.MAX_VALUE + 1 > Long.MAX_VALUE) {
-            System.out.println("Greater than max long!");
-        }
     }
 
     private static void divideTest() {

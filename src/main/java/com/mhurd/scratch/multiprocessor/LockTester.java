@@ -1,4 +1,4 @@
-package mhurd.scratch.multiprocessor;
+package com.mhurd.scratch.multiprocessor;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
@@ -11,32 +11,28 @@ public class LockTester {
     private final int numberOfThreads;
     private int counter = 0;
 
-    private int totalTimeInMillis;
-
-    public LockTester(Lock lockToTest, int numberOfThreads) throws InterruptedException {
+    private LockTester(Lock lockToTest, int numberOfThreads) throws InterruptedException {
         this.lock = lockToTest;
         this.finishLatch = new CountDownLatch(numberOfThreads);
         this.numberOfThreads = numberOfThreads;
         for (int i = 0; i < numberOfThreads; i++) {
-            Runnable work = new Runnable() {
-                @Override
-                public void run() {
+            Runnable work = () -> {
+                try {
+                    startLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                lock.lock();
+                try {
                     try {
-                        startLatch.await();
+                        Thread.currentThread().wait(1000L);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    lock.lock();
-                    try {
-                        int foo = 0;
-                        for (int i = 0; i < 100000; i++) {
-                            foo++;
-                        }
-                        counter++;
-                    } finally {
-                        lock.unlock();
-                        finishLatch.countDown();
-                    }
+                    counter++;
+                } finally {
+                    lock.unlock();
+                    finishLatch.countDown();
                 }
             };
             Thread thread = new Thread(work);
@@ -45,7 +41,7 @@ public class LockTester {
         }
     }
 
-    public void runTest() throws InterruptedException {
+    private void runTest() throws InterruptedException {
         long start = System.currentTimeMillis();
         startLatch.countDown();
         finishLatch.await();

@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.lang.reflect.Field;
 
@@ -50,13 +50,13 @@ public class GetDeclaredField {
             getDeclaredField1(clazz.getClass(), "aField");
         }
         long end1 = System.nanoTime();
-        System.out.println("While Loop = " + (end1-start1)/loops + " nanoseconds");
+        System.out.println("While Loop = " + (end1 - start1) / loops + " nanoseconds");
         long start2 = System.nanoTime();
         for (int i = 0; i < loops; i++) {
             getDeclaredField2(clazz.getClass(), "aField");
         }
         long end2 = System.nanoTime();
-        System.out.println("Recursion = " + (end2-start2)/loops + " nanoseconds");
+        System.out.println("Recursion = " + (end2 - start2) / loops + " nanoseconds");
     }
 
 }

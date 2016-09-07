@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import static org.junit.Assert.assertTrue;
 
@@ -11,7 +11,7 @@ public class BitwiseStorage {
 
         private int bit;
 
-        private LegProperty(int bit) {
+        LegProperty(int bit) {
             assert(bit % 2 == 0);
             this.bit = bit;
         }
@@ -31,13 +31,14 @@ public class BitwiseStorage {
 
     }
 
-    public static int legPropertiesNone = 0; // None
-    public static int legProperties1 = 1; // HOLD_TOMS_REPORTING
-    public static int legProperties2 = 2; // SKIP_CRITICAL_AMEND_CHECK
-    public static int legPropertiesAll = 3; // HOLD_TOMS_REPORTING & SKIP_CRITICAL_AMEND_CHECK
-    public static int legPropertiesExtra = 7; // HOLD_TOMS_REPORTING & SKIP_CRITICAL_AMEND_CHECK + extra 4 set
-
     public static void main(String[] args) {
+
+        final int legPropertiesNone = 0; // None
+        final int legProperties1 = 1; // HOLD_TOMS_REPORTING
+        final int legProperties2 = 2; // SKIP_CRITICAL_AMEND_CHECK
+        final int legPropertiesAll = 3; // HOLD_TOMS_REPORTING & SKIP_CRITICAL_AMEND_CHECK
+        final int legPropertiesExtra = 7; // HOLD_TOMS_REPORTING & SKIP_CRITICAL_AMEND_CHECK + extra 4 set
+
         assertTrue(!LegProperty.hasProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING));
         assertTrue(!LegProperty.hasProperties(legPropertiesNone, LegProperty.HOLD_TOMS_REPORTING,
             LegProperty.SKIP_CRITICAL_AMEND_CHECK));

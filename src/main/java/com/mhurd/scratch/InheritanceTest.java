@@ -1,14 +1,5 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
-import sun.plugin2.applet.Applet2ClassLoader;
-
-/**
- * Created with IntelliJ IDEA.
- * User: mhurd
- * Date: 20/08/12
- * Time: 15:59
- * To change this template use File | Settings | File Templates.
- */
 public class InheritanceTest {
 
     private static class SuperSuper {

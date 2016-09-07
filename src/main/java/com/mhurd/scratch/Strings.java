@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,11 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Strings {
-
-    public static final String P4_GMO_BIN_MATCH_REGEX = "UKDevelopment";
-    public static final String P4_GMO_BIN_REPLACE = "$GMO_BIN_DIR/";
-    public static final String P4_GMO_LIB_MATCH_REGEX = "UKDevelopment";
-    public static final String P4_GMO_LIB_REPLACE = "$GMO_LIB_DIR/";
 
     private static String prettyPrint(Collection<?> collection) {
         return prettyPrint(collection.toArray(new Object[] {}));
@@ -115,7 +110,7 @@ public class Strings {
             System.out.println("Split string has entry: '" + entry + "'");
         }
 
-        List<String> c = new ArrayList<String>();
+        List<String> c = new ArrayList<>();
         c.add("foo");
         c.add("bar");
         c.add("mike");
@@ -133,7 +128,7 @@ public class Strings {
         System.out.println("Strip 1234.00005 > " + stripZeros("1234.00005"));
 
         System.out.println();
-        List<String> idUserElectronics = new ArrayList<String>();
+        List<String> idUserElectronics = new ArrayList<>();
         idUserElectronics.add("v0117b");
         idUserElectronics.add("v00117a");
         idUserElectronics.add("v0117zzb");

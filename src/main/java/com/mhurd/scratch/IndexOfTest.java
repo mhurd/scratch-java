@@ -1,12 +1,5 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
-/**
- * Created with IntelliJ IDEA.
- * User: mhurd
- * Date: 07/09/12
- * Time: 15:57
- * To change this template use File | Settings | File Templates.
- */
 public class IndexOfTest {
 
     public static void main(String[] args) {

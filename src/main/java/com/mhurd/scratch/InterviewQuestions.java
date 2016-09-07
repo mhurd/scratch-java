@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.io.File;
 
@@ -13,13 +13,15 @@ public class InterviewQuestions {
             System.out.println(" " + startFile.getName());
             if (startFile.isDirectory()) {
                 File[] files = startFile.listFiles();
-                for (File file : files) {
-                    printDirRecur(indent + 4, file);
+                if (files != null) {
+                    for (File file : files) {
+                        printDirRecur(indent + 4, file);
+                    }
                 }
             }
         }
 
-        public static void printDirs(String pathName) {
+        static void printDirs(String pathName) {
             File start = new File(pathName);
             printDirRecur(1, start);
         }
@@ -35,10 +37,12 @@ public class InterviewQuestions {
             } else {
                 if (candidate.isDirectory()) {
                     File[] files = candidate.listFiles();
-                    for (File file : files) {
-                        String path = findRecur(searchString, file);
-                        if (path != null) {
-                            return path;
+                    if (files != null) {
+                        for (File file : files) {
+                            String path = findRecur(searchString, file);
+                            if (path != null) {
+                                return path;
+                            }
                         }
                     }
                 }
@@ -46,7 +50,7 @@ public class InterviewQuestions {
             return null;
         }
 
-        public static String find(String filename) {
+        static String find(String filename) {
             File start = new File("C:/Users/mhurd/development");
             return findRecur(filename, start);
         }
@@ -58,6 +62,8 @@ public class InterviewQuestions {
         System.out.println("Finding file: " + filename);
         String location = FindFile.find(filename);
         System.out.println("\nFile location: " +  location);
+        System.out.println("Printing Dir: " + filename);
+        PrintDirs.printDirs(".");
     }
 
 }

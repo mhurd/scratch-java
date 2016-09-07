@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class USIToString {
 
     private static final int ALL_BUSINESSES = -1;
 
-    private static final List<Integer> usiList = new ArrayList<Integer>();
+    private static final List<Integer> usiList = new ArrayList<>();
 
     static {
         usiList.add(ALL_BUSINESSES);
@@ -16,7 +16,7 @@ public class USIToString {
     }
 
     public String toString() {
-        StringBuilder b = new StringBuilder("USI enabled buinesses: ");
+        StringBuilder b = new StringBuilder("USI enabled businesses: ");
         int count = 1;
         for (Integer businessId : usiList) {
             b.append((businessId == ALL_BUSINESSES)? "All" : businessId);

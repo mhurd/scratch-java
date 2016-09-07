@@ -1,4 +1,4 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 public class FormatEffDateOffset {
 
@@ -16,8 +16,8 @@ public class FormatEffDateOffset {
 
     public static void main(String[] args) {
         int[] months = {1, 2, 4, 12, 18, 20, 24, 36, 120};
-        for (int i = 0; i < months.length; i++) {
-            System.out.println(months[i] + " = " + format(months[i]));
+        for (int month : months) {
+            System.out.println(month + " = " + format(month));
         }
     }
 

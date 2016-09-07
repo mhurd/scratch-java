@@ -1,10 +1,10 @@
-package mhurd.scratch.multiprocessor;
+package com.mhurd.scratch.multiprocessor;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
-public abstract class AbstractLock implements Lock {
+abstract class AbstractLock implements Lock {
 
     @Override
     public void lockInterruptibly() throws InterruptedException {

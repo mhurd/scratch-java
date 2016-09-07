@@ -1,16 +1,6 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 public class RegexSplitTest {
-
-    private static void split(String tenor) {
-        for (String s : tenor.split("\\d{1,2}")) {
-            if (s.isEmpty()) {
-                System.out.print(" ");
-            }
-            System.out.print(s);
-        }
-        System.out.println();
-    }
 
     private static void isValid(String tenor) {
         String regex = "^[1-9]*D$|^[1-9]*M$|^[1-9]*Y$";

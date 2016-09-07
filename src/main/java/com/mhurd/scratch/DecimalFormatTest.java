@@ -1,8 +1,6 @@
-package mhurd.scratch;
+package com.mhurd.scratch;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class DecimalFormatTest {
 

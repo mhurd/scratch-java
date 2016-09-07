@@ -1,4 +1,4 @@
-package mhurd.scratch.multiprocessor;
+package com.mhurd.scratch.multiprocessor;
 
 public class Mod {
 
