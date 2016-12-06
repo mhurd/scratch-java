@@ -12,6 +12,13 @@ public class DefaultMethods {
         }
     }
 
+    private interface Guardian {
+        default String welcome() {
+            return "Guardian";
+        }
+    }
+
+
     private interface Child extends Parent {
         default String welcome() {
             return "Child";
@@ -83,5 +90,18 @@ public class DefaultMethods {
         Parent parent = new ParentDefault();
         assertEquals("Parent", parent.welcome());
     }
+
+    @Test
+    public void testMultipleInheritance() {
+        class Carer implements Parent, Guardian {
+            // without this override the compile would fail as which 'welcome' to use?
+            @Override
+            public String welcome() {
+                return Parent.super.welcome(); // call to the desired implementation using the super syntax
+            }
+        }
+        assertEquals("Parent", new Carer().welcome());
+    }
+
 
 }
