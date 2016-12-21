@@ -1,5 +1,8 @@
 package com.mhurd.scratch.jdk8;
 
+import static com.mhurd.scratch.jdk8.model.Band.BOWIE;
+import static com.mhurd.scratch.jdk8.model.Band.EELS;
+import static com.mhurd.scratch.jdk8.model.Band.LED_ZEPPELIN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -23,93 +26,10 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.mhurd.scratch.jdk8.model.Band;
 import org.junit.Test;
 
 public class AdvancedCollectors {
-
-    private static class Member {
-
-        private final String name;
-
-        private Member(String name) {
-            this.name = name;
-        }
-
-        String getName() {
-            return name;
-        }
-
-        static List<Member> members(String... names) {
-            return Arrays.stream(names).map(Member::new).collect(Collectors.toList());
-        }
-
-    }
-
-    private static class Album {
-
-        private final String name;
-
-        private Album(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        static List<Album> albums(String... names) {
-            return Arrays.stream(names).map(Album::new).collect(Collectors.toList());
-        }
-
-    }
-
-    private static class Band {
-
-        private final String name;
-        private final List<Member> members;
-        private final List<Album> albums;
-
-        String getName() {
-            return name;
-        }
-
-        List<Member> getMembers() {
-            return members;
-        }
-
-        List<Album> getAlbums() {
-            return albums;
-        }
-
-        boolean isSolo() {
-            return getMembers().size() == 1;
-        }
-
-        private Band(String name, List<Member> members, List<Album> albums) {
-            this.name = name;
-            this.members = Collections.unmodifiableList(members);
-            this.albums = Collections.unmodifiableList(albums);
-        }
-    }
-
-    private final Band ledZeppelin =
-        new Band("Led Zeppelin",
-                 Member.members("John Bonham", "Jimmy Page", "Robert Plant", "John Paul Jones"),
-                 Album.albums("Houses of the Holy",
-                              "Physical Graffiti",
-                              "In Through the Out Door"));
-
-    private final Band eels =
-        new Band("Eels",
-                 Member.members("Mark Everett Smith" , "The Chet"),
-                 Album.albums("Blinking Lights and Other Revelations",
-                              "Wonderful, Glorious",
-                              "The Cautionary Tales of Mark Oliver Everett"));
-
-    private final Band bowie =
-        new Band("David Bowie",
-                 Member.members("David Bowie"),
-                 Album.albums("The Rise and Fall of Ziggy Stardust and the Spiders from Mars"));
 
     @Test
     public void toCollection() {
@@ -120,39 +40,39 @@ public class AdvancedCollectors {
 
     @Test
     public void max() {
-        Optional<Band> largest = Stream.of(ledZeppelin, eels, bowie)
+        Optional<Band> largest = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                                        .max(Comparator.comparing(band -> band.getMembers().size()));
         assertTrue(largest.isPresent());
-        assertEquals(ledZeppelin, largest.orElse(null));
+        assertEquals(LED_ZEPPELIN, largest.orElse(null));
     }
 
     @Test
     public void average() {
-        double average = Stream.of(ledZeppelin, eels, bowie)
+        double average = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                                .collect(Collectors.averagingInt(band -> band.getMembers().size()));
         assertEquals(2.3d, average, 0.04d);
     }
 
     @Test
     public void partition() {
-        Map<Boolean, List<Band>> partitioned = Stream.of(ledZeppelin, eels, bowie)
+        Map<Boolean, List<Band>> partitioned = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                                                      .collect(Collectors.partitioningBy(Band::isSolo));
-        assertEquals(Collections.singletonList(bowie), partitioned.get(true));
-        assertEquals(Arrays.asList(ledZeppelin, eels), partitioned.get(false));
+        assertEquals(Collections.singletonList(BOWIE), partitioned.get(true));
+        assertEquals(Arrays.asList(LED_ZEPPELIN, EELS), partitioned.get(false));
     }
 
     @Test
     public void grouping() {
-        Map<Integer, List<Band>> partitioned = Stream.of(ledZeppelin, eels, bowie)
+        Map<Integer, List<Band>> partitioned = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                                                      .collect(Collectors.groupingBy(band -> band.getMembers().size()));
-        assertEquals(Collections.singletonList(bowie), partitioned.get(1));
-        assertEquals(Collections.singletonList(eels), partitioned.get(2));
-        assertEquals(Collections.singletonList(ledZeppelin), partitioned.get(4));
+        assertEquals(Collections.singletonList(BOWIE), partitioned.get(1));
+        assertEquals(Collections.singletonList(EELS), partitioned.get(2));
+        assertEquals(Collections.singletonList(LED_ZEPPELIN), partitioned.get(4));
     }
 
     @Test
     public void strings() {
-        String bandNames = Stream.of(ledZeppelin, eels, bowie)
+        String bandNames = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
               .map(Band::getName)
               .collect(Collectors.joining(", ", "[", "]"));
         assertEquals("[Led Zeppelin, Eels, David Bowie]", bandNames);
@@ -161,7 +81,7 @@ public class AdvancedCollectors {
 
     @Test
     public void composingCollectors() {
-        final Map<Integer, Long> bandSizes = Stream.of(ledZeppelin, eels, bowie)
+        final Map<Integer, Long> bandSizes = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                                                    .collect(Collectors.groupingBy(band -> band.getAlbums().size(),
                                                                                 Collectors.counting()));
         assertEquals(Long.valueOf(1), bandSizes.get(1)); // only 1 band has 1 album
@@ -172,7 +92,7 @@ public class AdvancedCollectors {
     @Test
     public void composingMappingCollectors() {
         final Map<Integer, List<String>> bandSizes =
-            Stream.of(ledZeppelin, eels, bowie)
+            Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                   .collect(Collectors.groupingBy(band -> band.getAlbums().size(),
                                                  Collectors.mapping(Band::getName, Collectors.toList())));
         assertEquals(Collections.singletonList("David Bowie"), bandSizes.get(1)); // only 1 band has 1 album
@@ -258,7 +178,7 @@ public class AdvancedCollectors {
 
     @Test
     public void customCollectors() {
-        String result = Stream.of(ledZeppelin, eels, bowie)
+        String result = Stream.of(LED_ZEPPELIN, EELS, BOWIE)
                               .map(Band::getName)
                               .collect(new StringCollector(", ", "[", "]"));
         assertEquals("[Led Zeppelin, Eels, David Bowie]", result);
