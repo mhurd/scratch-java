@@ -13,11 +13,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -68,6 +70,20 @@ public class AdvancedCollectors {
         assertEquals(Collections.singletonList(BOWIE), partitioned.get(1));
         assertEquals(Collections.singletonList(EELS), partitioned.get(2));
         assertEquals(Collections.singletonList(LED_ZEPPELIN), partitioned.get(4));
+    }
+
+    @Test
+    public void orderedMapGrouping() {
+        List<Band> bands = Arrays.asList(LED_ZEPPELIN, EELS, BOWIE);
+        Map<String, List<Band>> map = bands.stream().collect(
+            Collectors.groupingBy(Band::getName,
+                                  LinkedHashMap::new, // Key change!
+                                  Collectors.toList()));
+        AtomicInteger i = new AtomicInteger(0);
+        map.forEach((k, v) -> {
+            assertEquals(bands.get(i.get()), v.get(0));
+            i.set(i.get() + 1);
+        });
     }
 
     @Test

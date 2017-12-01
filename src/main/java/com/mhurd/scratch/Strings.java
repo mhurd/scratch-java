@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.Test;
+
 public class Strings {
 
     private static String prettyPrint(Collection<?> collection) {
@@ -157,5 +159,17 @@ public class Strings {
         String test = "12345678901";
         System.out.println("SUBSTRING: " + test.substring(0, 10));
     }
+
+    @Test
+    public void testPaddingInt() {
+        System.out.println(Integer.valueOf("09"));
+        System.out.println(String.format("%02d", 9));
+    }
+
+    @Test
+    public void testValueOf() {
+        System.out.println(String.valueOf(null));
+    }
+
 
 }
